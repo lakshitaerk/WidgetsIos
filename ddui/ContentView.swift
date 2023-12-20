@@ -5,25 +5,6 @@
 //  Created by lakshita sodhi on 20/12/23.
 //
 
-//import SwiftUI
-//
-//struct ContentView: View {
-//    var body: some View {
-//        VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundColor(.accentColor)
-//            Text("Hello, world!")
-//        }
-//        .padding()
-//    }
-//}
-//
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
 
 import SwiftUI
 
@@ -56,6 +37,12 @@ struct ContentView: View {
           },
           "components": [
             {
+                    "type": "image",
+                    "id": "imgLogo",
+                    "url": "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8fDA%3D",
+                              
+                    },
+            {
               "type": "button",
               "id": "btnSubmit",
               "title": "Submit",
@@ -71,10 +58,11 @@ struct ContentView: View {
               "font": {
                 "size": 18,
                 "style": "bold"
+           }
               },
     
-             
-            }
+              
+            
           ]
         }
     """
@@ -109,14 +97,14 @@ struct Screen: Decodable {
     let backgroundColor: String
 }
 
-struct UIComponent: Decodable {
+struct UIComponent: Decodable,Identifiable {
     let type: String
     let id: String
     let title: String?
     let text: String?
     let backgroundColor: String?
     let textColor: String?
-   
+    let url: String?
    
 }
 
@@ -135,10 +123,26 @@ struct ScreenView: View {
                     ButtonView(component: component)
                 case "label":
                     LabelView(component: component)
+                case "image":
+                    ImageView(component: component)
                 default:
                     EmptyView()
                 }
             }
+        }
+    }
+}
+struct ImageView: View {
+    let component: UIComponent
+
+    var body: some View {
+        if let imageUrl = URL(string: component.url ?? ""),
+           let imageData = try? Data(contentsOf: imageUrl),
+           let uiImage = UIImage(data: imageData) {
+            Image(uiImage: uiImage)
+                .resizable()
+                
+                
         }
     }
 }
