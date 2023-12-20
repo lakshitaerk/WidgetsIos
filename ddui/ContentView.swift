@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+
 extension Color {
     init(hex: String, opacity: Double = 1.0) {
         var hexSanitized = hex
@@ -60,6 +61,16 @@ struct ContentView: View {
                 "style": "bold"
            }
               },
+    {
+                  "type": "list",
+                  "id": "lstItems",
+                  "items": [
+                    {"id": "item1", "text": "Item 1"},
+                    {"id": "item2", "text": "Item 2"},
+                    {"id": "item3", "text": "Item 3"}
+                  ],
+                
+                }
     
               
             
@@ -105,11 +116,15 @@ struct UIComponent: Decodable,Identifiable {
     let backgroundColor: String?
     let textColor: String?
     let url: String?
-   
+    let items: [ListItem]?
 }
 
 
 
+struct ListItem: Decodable, Identifiable {
+    let id: String
+    let text: String
+}
 
 
 struct ScreenView: View {
@@ -125,13 +140,28 @@ struct ScreenView: View {
                     LabelView(component: component)
                 case "image":
                     ImageView(component: component)
+                case "list":
+                    ListView(component: component)
                 default:
                     EmptyView()
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
     }
 }
+struct ListView: View {
+    let component: UIComponent
+
+    var body: some View {
+        List(component.items ?? [], id: \.id) { item in
+            Text(item.text)
+        }
+       
+    }
+}
+
 struct ImageView: View {
     let component: UIComponent
 
@@ -141,7 +171,8 @@ struct ImageView: View {
            let uiImage = UIImage(data: imageData) {
             Image(uiImage: uiImage)
                 .resizable()
-                
+                .frame(width: 200, height: 200)
+                .cornerRadius(10)
                 
         }
     }
