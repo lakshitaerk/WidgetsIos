@@ -42,7 +42,7 @@ let jsonData = """
                 "type": "image",
                 "id": "imgLogo",
                 "url": "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8fDA%3D",
-                          
+                    "include": true
                 },
    
        
@@ -52,6 +52,7 @@ let jsonData = """
               "id": "lblMessage",
               "text": "@selenagomez",
               "textColor": "#ffffff",
+"include": true,
               "font": {
                 "size": 18,
                 "style": "bold"
@@ -68,7 +69,8 @@ let jsonData = """
                     {"id": "item4", "text": "Item 4"},
                     {"id": "item5", "text": "Item 5"},
                   ],
-                
+                "include": true,
+     "scrollDirection": "vertical"
                 },
         {
           "type": "button",
@@ -76,8 +78,23 @@ let jsonData = """
           "title": "Submit",
           "backgroundColor": "#ffffff",
           "textColor": "#800080",
-         
+         "include": true
         },
+{
+              "type": "grid",
+              "id": "gridItems",
+              "columns": 2,
+              "rows": 2,
+              "items": [
+                {"id": "gridItem1", "text": "Grid Item 1"},
+                {"id": "gridItem2", "text": "Grid Item 2"},
+                {"id": "gridItem3", "text": "Grid Item 3"},
+                {"id": "gridItem4", "text": "Grid Item 4"}
+              ],
+              "include": true,
+               "backgroundColor": "#ffffff",
+            },
+
         
      ]
     }
@@ -112,6 +129,11 @@ struct Screen: Decodable {
 let title: String
 let backgroundColor: String
 }
+enum ScrollDirection: String {
+    case vertical
+    case horizontal
+}
+
 
 struct UIComponent: Decodable,Identifiable {
 let type: String
@@ -122,6 +144,10 @@ let backgroundColor: String?
 let textColor: String?
 let url: String?
 let items: [ListItem]?
+    let include: Bool
+    let scrollDirection: String?
+    let columns: Int?
+    let rows: Int?
 }
 
 
@@ -129,6 +155,7 @@ let items: [ListItem]?
 struct ListItem: Decodable, Identifiable {
 let id: String
 let text: String
+    let url: String?
 }
 
 
@@ -137,7 +164,7 @@ let uiModel: UIModel
 
 var body: some View {
     VStack {
-        ForEach(uiModel.components, id: \.id) { component in
+        ForEach(uiModel.components.filter { $0.include }, id: \.id) { component in
             switch component.type {
             case "button":
                 ButtonView(component: component)
@@ -147,6 +174,9 @@ var body: some View {
                 ImageView(component: component)
             case "list":
                 ListView(component: component)
+            case "grid":
+                GridView(component: component)
+           
             default:
                 EmptyView()
             }
@@ -157,27 +187,89 @@ var body: some View {
     
 }
 }
-struct ListView: View {
-let component: UIComponent
+struct GridView: View {
+    let component: UIComponent
 
-var body: some View {
-    ScrollView {
-    VStack {
-        ForEach(component.items ?? []) { item in
-                Text(item.text)
-                .frame(maxWidth: .infinity)
-                .padding(12)
-                .background(
-               RoundedRectangle(cornerRadius: 10) // Adjust cornerRadius as needed
-                   .fill(Color(hex: component.backgroundColor ?? ""))
-           )
-           .clipShape(RoundedRectangle(cornerRadius: 10))
+    @ViewBuilder
+    var body: some View {
+        if component.include {
+            let columns = component.columns ?? 2
+            let rows = component.rows ?? 2
+            let gridItems = Array(component.items?.prefix(rows * columns) ?? [])
 
+            LazyVGrid(columns: Array(repeating: GridItem(), count: columns)) {
+                ForEach(gridItems) { item in
+                    Text(item.text)
+                        .frame(maxWidth: .infinity)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color(hex: component.backgroundColor ?? ""))
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding(.horizontal, 8.0)
+                }
+            }
+            .padding(.horizontal, 8.0) // Additional horizontal padding for GridView
+        } else {
+            EmptyView()
         }
-    }.padding(.horizontal, 8.0)
+    }
+}
+
+
+
+
+struct ListView: View {
+    let component: UIComponent
+
+    var body: some View {
+        if component.include {
+            if let scrollDirection = ScrollDirection(rawValue: component.scrollDirection ?? "") {
+                switch scrollDirection {
+                case .vertical:
+                    verticalList()
+                case .horizontal:
+                    horizontalList()
+                }
             }
         }
     }
+
+    private func verticalList() -> some View {
+        ScrollView(.vertical) {
+            VStack(spacing: 6) {
+                ForEach(component.items ?? []) { item in
+                    listItem(item)
+                }
+            }
+        }
+    }
+
+    private func horizontalList() -> some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 0) {
+                ForEach(component.items ?? []) { item in
+                    listItem(item)
+                }
+            }
+        }
+    }
+
+    private func listItem(_ item: ListItem) -> some View {
+        Text(item.text)
+            .frame(maxWidth: .infinity)
+            .padding(12)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(hex: component.backgroundColor ?? ""))
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding(.horizontal, 8.0)
+    }
+}
+
+
 
 struct ImageView: View {
 let component: UIComponent
