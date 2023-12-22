@@ -8,6 +8,7 @@ struct MyUIModel: Decodable {
 struct MyScreen: Decodable {
     let title: String
     let backgroundColor: String
+    let backgroundImageURL: String
 }
 
 struct MyUIComponent: Decodable, Identifiable {
@@ -30,29 +31,33 @@ struct MyImageGridView: View {
 
     var body: some View {
         if component.include {
-            let columns = component.columns ?? 2
-            let rows = component.rows ?? 2
-            let gridItems = Array(component.items?.prefix(rows * columns) ?? [])
+            ScrollView {
+                let columns = component.columns ?? 2
+                let rows = component.rows ?? 2
+                let gridItems = Array(component.items?.prefix(rows * columns) ?? [])
 
-            LazyVGrid(columns: Array(repeating: GridItem(), count: columns)) {
-                ForEach(gridItems) { item in
-                    MyImageView(url: item.url)
-                        .frame(maxWidth: .infinity)
-                        .padding(12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(hex: component.backgroundColor ?? ""))
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .padding(.horizontal, 8.0)
+                LazyVGrid(columns: Array(repeating: GridItem(), count: columns)) {
+                    ForEach(gridItems) { item in
+                        MyImageView(url: item.url)
+                            .frame(maxWidth: .infinity)
+                            .padding(12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color(hex: component.backgroundColor ?? ""))
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.horizontal, 8.0)
+                    }
                 }
+                .padding(.horizontal, 8.0)
             }
-            .padding(.horizontal, 8.0)
+            .padding(16)
         } else {
             EmptyView()
         }
     }
 }
+
 
 struct MyImageView: View {
     let url: String
@@ -74,7 +79,9 @@ struct MycView: View {
         {
           "screen": {
             "title": "Image Grid Screen",
-            "backgroundColor": "#FF0000"
+            "backgroundColor": "#FF0000",
+    "backgroundImageURL": "https://img.freepik.com/premium-photo/paper-iphone-wallpapers-iphone-is-best-high-definition-iphone-wallpaper-you-can-make-this_876023-828.jpg?w=360"
+             
           },
           "components": [
             {
@@ -91,7 +98,7 @@ struct MycView: View {
                     {"id": "image6", "url": "https://cdn.pixabay.com/photo/2015/04/19/08/32/rose-729509_640.jpg"},
               ],
               "include": true,
-              "backgroundColor": "#E0E0E0"
+              "backgroundColor": "#ffffff"
             }
           ]
         }
@@ -99,32 +106,40 @@ struct MycView: View {
 
     var body: some View {
         if let uiModel = try? JSONDecoder().decode(MyUIModel.self, from: Data(jsonData.utf8)) {
-            MyScreenView(uiModel: uiModel)
-                .background(Color(hex: uiModel.screen.backgroundColor))
-                .navigationTitle(uiModel.screen.title)
-        } else {
-            Text("Failed to load UI data")
+                    MyScreenView(uiModel: uiModel)
+                } else {
+                    Text("Failed to load UI data")
+                }
+            }
         }
-    }
-}
-
 struct MyScreenView: View {
     let uiModel: MyUIModel
 
     var body: some View {
-        VStack {
-            ForEach(uiModel.components.filter { $0.include }, id: \.id) { component in
-                switch component.type {
-                case "grid":
-                    MyImageGridView(component: component)
-                default:
-                    EmptyView()
-                }
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-}
+        ZStack {
+            if let backgroundImageURL = URL(string: uiModel.screen.backgroundImageURL ),
+                      let imageData = try? Data(contentsOf: backgroundImageURL),
+                      let uiImage = UIImage(data: imageData) {
+                       Image(uiImage: uiImage)
+                           .resizable()
+                           .aspectRatio(contentMode: .fill)
+                           .edgesIgnoringSafeArea(.all)
+                   }
+
+                   VStack {
+                       ForEach(uiModel.components.filter { $0.include }, id: \.id) { component in
+                           switch component.type {
+                           case "grid":
+                               MyImageGridView(component: component)
+                           default:
+                               EmptyView()
+                           }
+                       }
+                   }
+               }
+           }
+       }
+
 
 struct MyContentView_Previews_PreviewProvider: PreviewProvider {
     static var previews: some View {
