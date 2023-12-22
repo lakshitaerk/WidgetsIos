@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		526D44B52B35B67F00ACDD49 /* grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526D44B42B35B67F00ACDD49 /* grid.swift */; };
 		527D3F792B330405004AD228 /* dduiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527D3F782B330405004AD228 /* dduiApp.swift */; };
 		527D3F7B2B330405004AD228 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527D3F7A2B330405004AD228 /* ContentView.swift */; };
 		527D3F7D2B330409004AD228 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 527D3F7C2B330409004AD228 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		526D44B42B35B67F00ACDD49 /* grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = grid.swift; sourceTree = "<group>"; };
 		527D3F752B330405004AD228 /* ddui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ddui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		527D3F782B330405004AD228 /* dduiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dduiApp.swift; sourceTree = "<group>"; };
 		527D3F7A2B330405004AD228 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				527D3F7A2B330405004AD228 /* ContentView.swift */,
 				527D3F7C2B330409004AD228 /* Assets.xcassets */,
 				527D3F7E2B330409004AD228 /* Preview Content */,
+				526D44B42B35B67F00ACDD49 /* grid.swift */,
 			);
 			path = ddui;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				527D3F7B2B330405004AD228 /* ContentView.swift in Sources */,
 				527D3F792B330405004AD228 /* dduiApp.swift in Sources */,
+				526D44B52B35B67F00ACDD49 /* grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
