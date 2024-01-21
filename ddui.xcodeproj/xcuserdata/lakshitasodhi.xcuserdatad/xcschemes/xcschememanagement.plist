@@ -4,10 +4,50 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ddui.xcscheme_^#shared#^_</key>
+		<key>MapBoxWidgetExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>WidgetsExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>ddui.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>527D3F742B330405004AD228</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>527D3F842B330409004AD228</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>527D3F8E2B33040A004AD228</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52ED139E2B5829E9008E4A78</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52FF0A652B5C657100D2B3E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
