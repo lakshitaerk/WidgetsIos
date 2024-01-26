@@ -24,7 +24,7 @@ struct map: View {
         Location (name: "Tower of London" , coordinate: CLLocationCoordinate2D (latitude: 51.508, longitude: -0.076))
     ]
     
-    let pinColor = Color (.blue)
+    let pinColor = Color (.white)
     
     
     var body: some View {
@@ -35,10 +35,10 @@ struct map: View {
 //                    Circle()
 //                        .stroke(.red, lineWidth: 3)
 //                        . frame (width: 44, height:44)
-                    Image("person")
+                    Image("person2")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 50, height: 50)
+                    .frame(width: 60, height: 60)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(pinColor, lineWidth: 2))
                    // .aspectRatio( contentMode: .fit)

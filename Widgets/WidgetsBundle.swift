@@ -13,7 +13,7 @@ struct WidgetsBundle: WidgetBundle {
     var body: some Widget {
      //  Widgets()
         MyWidget()
-      
+     
         WidgetsLiveActivity()
     }
 }
