@@ -300,7 +300,7 @@ struct Location: Identifiable {
     let coordinate: CLLocationCoordinate2D
 }
 
-struct MyWidget: Widget {
+struct WidgetSmall: Widget {
     let kind: String = "MyWidget"
    
     var body: some WidgetConfiguration {
@@ -309,7 +309,7 @@ struct MyWidget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
-       // .supportedFamilies([.systemSmall])
+       .supportedFamilies([.systemSmall])
     }
 }
 
@@ -420,12 +420,12 @@ struct MapboxImageURLGenerator {
 }
 
 
-struct MyWidgetBundle: WidgetBundle {
-    @WidgetBundleBuilder
-    var body: some Widget {
-        MyWidget()
-    }
-}
+//struct MyWidgetBundle: WidgetBundle {
+//    @WidgetBundleBuilder
+//    var body: some Widget {
+//        MyWidget()
+//    }
+//}
 
 struct MyWidget_Previews: PreviewProvider {
     static var previews: some View {

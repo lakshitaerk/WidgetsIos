@@ -27,6 +27,10 @@
 		52ED13B42B5829EE008E4A78 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 52ED139F2B5829E9008E4A78 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		52ED13BA2B582BF8008E4A78 /* map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED13B92B582BF8008E4A78 /* map.swift */; };
 		52FF0A5F2B5C627D00D2B3E4 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 52FF0A5E2B5C627D00D2B3E4 /* MapboxMaps */; };
+		52FF0A832B64527C00D2B3E4 /* WidgetMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF0A822B64527C00D2B3E4 /* WidgetMedium.swift */; };
+		52FF0A842B64527C00D2B3E4 /* WidgetMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF0A822B64527C00D2B3E4 /* WidgetMedium.swift */; };
+		52FF0A862B64573100D2B3E4 /* WidgetLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF0A852B64573100D2B3E4 /* WidgetLarge.swift */; };
+		52FF0A872B64573100D2B3E4 /* WidgetLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF0A852B64573100D2B3E4 /* WidgetLarge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,8 @@
 		52ED13AF2B5829EE008E4A78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52ED13B92B582BF8008E4A78 /* map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = map.swift; sourceTree = "<group>"; };
 		52ED13BB2B582D8A008E4A78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		52FF0A822B64527C00D2B3E4 /* WidgetMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetMedium.swift; sourceTree = "<group>"; };
+		52FF0A852B64573100D2B3E4 /* WidgetLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLarge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,8 @@
 				52ED13AC2B5829E9008E4A78 /* Widgets.intentdefinition */,
 				52ED13AD2B5829EE008E4A78 /* Assets.xcassets */,
 				52ED13AF2B5829EE008E4A78 /* Info.plist */,
+				52FF0A822B64527C00D2B3E4 /* WidgetMedium.swift */,
+				52FF0A852B64573100D2B3E4 /* WidgetLarge.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -380,8 +388,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52FF0A832B64527C00D2B3E4 /* WidgetMedium.swift in Sources */,
 				52ED13B12B5829EE008E4A78 /* Widgets.intentdefinition in Sources */,
 				527D3F7B2B330405004AD228 /* ContentView.swift in Sources */,
+				52FF0A862B64573100D2B3E4 /* WidgetLarge.swift in Sources */,
 				527D3F792B330405004AD228 /* dduiApp.swift in Sources */,
 				52ED13BA2B582BF8008E4A78 /* map.swift in Sources */,
 				52CDA8BC2B5C608B00CD386D /* Mapbox.swift in Sources */,
@@ -411,9 +421,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				52ED13B02B5829EE008E4A78 /* Widgets.intentdefinition in Sources */,
+				52FF0A872B64573100D2B3E4 /* WidgetLarge.swift in Sources */,
 				52ED13A92B5829E9008E4A78 /* WidgetsLiveActivity.swift in Sources */,
 				52ED13AB2B5829E9008E4A78 /* Widgets.swift in Sources */,
 				52ED13A72B5829E9008E4A78 /* WidgetsBundle.swift in Sources */,
+				52FF0A842B64527C00D2B3E4 /* WidgetMedium.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
