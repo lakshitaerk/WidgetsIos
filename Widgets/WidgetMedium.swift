@@ -16,6 +16,35 @@ struct Location2: Identifiable {
     let coordinate: CLLocationCoordinate2D
     let imageName: String
 }
+
+class WidgetViewModel: ObservableObject {
+    @Published var locations: [Location2] = [
+        Location2(name: "Kolkata", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141), imageName: "person2"),
+        Location2(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076), imageName: "person3")
+    ].shuffled()
+
+    private var timer: Timer?
+
+    init() {
+        startTimer()
+    }
+
+   
+
+    deinit {
+        timer?.invalidate()
+    }
+    func refreshData() {
+           locations.shuffle()
+       }
+    private func startTimer() {
+            timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
+                self?.locations.shuffle()
+                MyProvider2().reloadTimeline()
+            }
+        }
+}
+
 struct WidgetMedium: Widget {
     let kind: String = "Widget"
     
@@ -43,6 +72,11 @@ struct MyProvider2: TimelineProvider {
         let timeline = Timeline(entries: [model], policy: .atEnd)
         completion(timeline)
     }
+    internal func reloadTimeline() {
+            let newModel = MyModel2(date: Date(), imageURL: MapboxImageURLGenerator2.generateURL())
+            let timeline = Timeline(entries: [newModel], policy: .atEnd)
+            WidgetCenter.shared.reloadTimelines(ofKind: "Widget")
+        }
 }
 struct MyModel2: TimelineEntry {
     let date: Date
@@ -57,10 +91,7 @@ struct MyWidgetView2: View {
     var entry: MyProvider2.Entry
     
     
-    @State private var locations = [
-        Location2(name: "Kolkata", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141),imageName: "person2"),
-        Location2(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076),imageName: "person3")
-    ].shuffled()
+    @StateObject private var viewModel = WidgetViewModel()
     
     let pinColor = Color(.white)
     
@@ -79,7 +110,7 @@ struct MyWidgetView2: View {
                 
                 
                 HStack(){
-                    ForEach(locations) { location in
+                    ForEach(viewModel.locations) { location in
                         GeometryReader { geometry in
                             VStack {
                                 
@@ -107,12 +138,12 @@ struct MyWidgetView2: View {
                 }
                 .padding([.top, .leading, .trailing], 8.0)
                 .frame(maxWidth: .infinity)
-                .onAppear{
-                    // Start a timer to shuffle the array every second
-                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                        locations.shuffle()
-                    }
-                }
+//                .onAppear{
+//                    // Start a timer to shuffle the array every second
+//                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+//                        viewModel.locations.shuffle()
+//                    }
+//                }
                 
                 HStack{
                     
