@@ -46,7 +46,7 @@ class WidgetViewModel: ObservableObject {
 }
 
 struct WidgetMedium: Widget {
-    let kind: String = "Widget"
+    let kind: String = "MediumWidget"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: MyProvider2()) { entry in
@@ -75,7 +75,7 @@ struct MyProvider2: TimelineProvider {
     internal func reloadTimeline() {
             let newModel = MyModel2(date: Date(), imageURL: MapboxImageURLGenerator2.generateURL())
             let timeline = Timeline(entries: [newModel], policy: .atEnd)
-            WidgetCenter.shared.reloadTimelines(ofKind: "Widget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "MediumWidget")
         }
 }
 struct MyModel2: TimelineEntry {

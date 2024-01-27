@@ -12,10 +12,11 @@ import SwiftUI
 struct WidgetsBundle: WidgetBundle {
     @WidgetBundleBuilder
     var body: some Widget {
-     //  Widgets()
+     
         WidgetSmall()
       WidgetMedium()
         WidgetLarge()
+    
         WidgetsLiveActivity()
     }
 }

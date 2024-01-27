@@ -8,12 +8,18 @@
 import SwiftUI
 import WidgetKit
 import MapKit
+struct Location3: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+    let imageName: String
+}
 
-class WidgetViewModel2: ObservableObject {
-    @Published var locations: [Location2] = [
-        Location2(name: "Kolkata", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141), imageName: "person3"),
-        Location2(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076), imageName: "person"),
-        Location2(name: "Amritsar", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076), imageName: "person2")
+class WidgetViewModel3: ObservableObject {
+    @Published var locations: [Location3] = [
+        Location3(name: "Kolkata", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141), imageName: "person3"),
+        Location3(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076), imageName: "person"),
+        Location3(name: "Amritsar", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076), imageName: "person2")
     ].shuffled()
 
     private var timer: Timer?
@@ -33,14 +39,14 @@ class WidgetViewModel2: ObservableObject {
     private func startTimer() {
             timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
                 self?.locations.shuffle()
-                MyProvider3().reloadTimeline()
+                MyProvider3().reloadTimeline2()
             }
         }
 }
 
 
 struct WidgetLarge: Widget {
-    let kind: String = "Widget"
+    let kind: String = "LargeWidget"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: MyProvider3()) { entry in
@@ -62,14 +68,14 @@ struct MyProvider3: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<MyModel3>) -> ()) {
-        let model = MyModel3(date: Date(), imageURL: MapboxImageURLGenerator2.generateURL())
+        let model = MyModel3(date: Date(), imageURL: MapboxImageURLGenerator3.generateURL())
         let timeline = Timeline(entries: [model], policy: .atEnd)
         completion(timeline)
     }
-    internal func reloadTimeline() {
+    internal func reloadTimeline2() {
             let newModel = MyModel3(date: Date(), imageURL: MapboxImageURLGenerator3.generateURL())
             let timeline = Timeline(entries: [newModel], policy: .atEnd)
-            WidgetCenter.shared.reloadTimelines(ofKind: "Widget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "LargeWidget")
         }
 }
 struct MyModel3: TimelineEntry {
@@ -85,7 +91,7 @@ struct MyWidgetView3: View {
     var entry: MyProvider3.Entry
     
     
-    @StateObject private var viewModel = WidgetViewModel2()
+    @StateObject private var viewModel = WidgetViewModel3()
     
     let pinColor = Color(.white)
     
@@ -148,7 +154,7 @@ struct MyWidgetView3: View {
                                         // Circle Button 2
         CircleButton(imageName: "house", buttonColor: Color.purple, action: {
                                             // Action for Button 2
-                                            print("Button 2 tapped")
+                        print("Button 2 tapped")
                                         })
                                         
                                         // Circle Button 3
@@ -201,7 +207,7 @@ struct MapboxImageURLGenerator3{
         @State var latitude = 51.501
         // Replace this with your logic to generate Mapbox image URL
         return URL(string:
-                    "https://api.mapbox.com/styles/v1/erklabs/clrktvr2v002q01peameb9am0/static/\(longitude),\(latitude),13,0/320x340@2x?access_token=pk.eyJ1IjoiZXJrbGFicyIsImEiOiJjbGtqcWRnYTMwbjc4M21sbml3eTUxbHZzIn0.xpSDMZkBifhBOyNdzu21Xw")
+                    "https://api.mapbox.com/styles/v1/erklabs/clrktvr2v002q01peameb9am0/static/\(longitude),\(latitude),13,0/330x340@2x?access_token=pk.eyJ1IjoiZXJrbGFicyIsImEiOiJjbGtqcWRnYTMwbjc4M21sbml3eTUxbHZzIn0.xpSDMZkBifhBOyNdzu21Xw")
     }
 }
 
