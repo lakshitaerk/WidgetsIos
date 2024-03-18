@@ -21,27 +21,27 @@ class WidgetViewModel3: ObservableObject {
         Location3(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076), imageName: "person"),
         Location3(name: "Amritsar", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076), imageName: "person2")
     ].shuffled()
-
+    
     private var timer: Timer?
-
+    
     init() {
         startTimer()
     }
-
-   
-
+    
+    
+    
     deinit {
         timer?.invalidate()
     }
     func refreshData() {
-           locations.shuffle()
-       }
+        locations.shuffle()
+    }
     private func startTimer() {
-            timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
-                self?.locations.shuffle()
-                MyProvider3().reloadTimeline2()
-            }
+        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
+            self?.locations.shuffle()
+            MyProvider3().reloadTimeline2()
         }
+    }
 }
 
 
@@ -73,10 +73,10 @@ struct MyProvider3: TimelineProvider {
         completion(timeline)
     }
     internal func reloadTimeline2() {
-            let newModel = MyModel3(date: Date(), imageURL: MapboxImageURLGenerator3.generateURL())
-            let timeline = Timeline(entries: [newModel], policy: .atEnd)
-            WidgetCenter.shared.reloadTimelines(ofKind: "LargeWidget")
-        }
+        let newModel = MyModel3(date: Date(), imageURL: MapboxImageURLGenerator3.generateURL())
+        let timeline = Timeline(entries: [newModel], policy: .atEnd)
+        WidgetCenter.shared.reloadTimelines(ofKind: "LargeWidget")
+    }
 }
 struct MyModel3: TimelineEntry {
     let date: Date
@@ -133,47 +133,47 @@ struct MyWidgetView3: View {
                                  y: CGFloat.random(in: 0...(geometry.size.height - 60)))
                     }
                 }
+                
+                
+                HStack{
                     
-                  
-                    HStack{
-                        
-                VStack {
-                            // Elevated Container
-            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.white)
-                                .frame(height: 75)
-                                .padding()
-                                .overlay(
+                    VStack {
+                        // Elevated Container
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.white)
+                            .frame(height: 75)
+                            .padding()
+                            .overlay(
                                 HStack(spacing: 20) {
-                                        // Circle Button 1
-    CircleButton(imageName: "magnifyingglass", buttonColor: Color.gray, action: {
-                                            // Action for Button 1
-                                            print("Button 1 tapped")
-                                        })
-                                        
-                                        // Circle Button 2
-        CircleButton(imageName: "house", buttonColor: Color.purple, action: {
-                                            // Action for Button 2
-                        print("Button 2 tapped")
-                                        })
-                                        
-                                        // Circle Button 3
-        CircleButton(imageName: "message", buttonColor: Color.green,action: {
-                                            // Action for Button 3
-                                            print("Button 3 tapped")
-                                        })
-                                        
-                                        // Circle Button 4
-        CircleButton(imageName: "gear", buttonColor: Color.orange, action: {
-                                            // Action for Button 4
-                                            print("Button 4 tapped")
-                                        })
-                                    }
-                                        
-                                ) .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        }
+                                    // Circle Button 1
+                                    CircleButton(imageName: "icon1",  action: {
+                                        // Action for Button 1
+                                        print("Button 1 tapped")
+                                    })
+                                    
+                                    // Circle Button 2
+                                    CircleButton(imageName: "icon2",  action: {
+                                        // Action for Button 2
+                                        print("Button 2 tapped")
+                                    })
+                                    
+                                    // Circle Button 3
+                                    CircleButton(imageName: "icon3", action: {
+                                        // Action for Button 3
+                                        print("Button 3 tapped")
+                                    })
+                                    
+                                    // Circle Button 4
+                                    CircleButton(imageName: "icon4", action: {
+                                        // Action for Button 4
+                                        print("Button 4 tapped")
+                                    })
+                                }
+                                
+                            ) .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
                     }
-                   
+                }
+                
                 
             }
             //MapSnapshotImageView()
@@ -182,19 +182,17 @@ struct MyWidgetView3: View {
 }
 struct CircleButton: View {
     let imageName: String
-    let buttonColor: Color
-    let action: () -> Void
    
+    let action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            Image(systemName: imageName)
+            Image(imageName)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 35, height: 35)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 48, height: 48)
                 .foregroundColor(.white)
-                .padding(8)
-                .background(Circle().fill(buttonColor))
+                .background(Circle())
         }
     }
 }
