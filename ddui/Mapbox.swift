@@ -16,6 +16,7 @@ struct Mapbox: View {
     var body: some View {
         let center = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.12)
         Map(initialViewport: .camera(center: center, zoom: 8, bearing: 0, pitch: 0))
+            
         .ignoresSafeArea()
         }
     }
@@ -26,3 +27,4 @@ struct Mapbox_Previews: PreviewProvider {
         Mapbox()
     }
 }
+

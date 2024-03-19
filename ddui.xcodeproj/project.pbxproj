@@ -17,6 +17,7 @@
 		527D3F942B33040A004AD228 /* dduiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527D3F932B33040A004AD228 /* dduiUITests.swift */; };
 		527D3F962B33040A004AD228 /* dduiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527D3F952B33040A004AD228 /* dduiUITestsLaunchTests.swift */; };
 		52CDA8BC2B5C608B00CD386D /* Mapbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CDA8BB2B5C608B00CD386D /* Mapbox.swift */; };
+		52D884032BA9DE8200BEC3EE /* maps3d.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D884022BA9DE8200BEC3EE /* maps3d.swift */; };
 		52ED13A22B5829E9008E4A78 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52ED13A12B5829E9008E4A78 /* WidgetKit.framework */; };
 		52ED13A42B5829E9008E4A78 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52ED13A32B5829E9008E4A78 /* SwiftUI.framework */; };
 		52ED13A72B5829E9008E4A78 /* WidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED13A62B5829E9008E4A78 /* WidgetsBundle.swift */; };
@@ -85,6 +86,7 @@
 		527D3F932B33040A004AD228 /* dduiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dduiUITests.swift; sourceTree = "<group>"; };
 		527D3F952B33040A004AD228 /* dduiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dduiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		52CDA8BB2B5C608B00CD386D /* Mapbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapbox.swift; sourceTree = "<group>"; };
+		52D884022BA9DE8200BEC3EE /* maps3d.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = maps3d.swift; sourceTree = "<group>"; };
 		52ED139F2B5829E9008E4A78 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		52ED13A12B5829E9008E4A78 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		52ED13A32B5829E9008E4A78 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -169,6 +171,7 @@
 				526D44B42B35B67F00ACDD49 /* grid.swift */,
 				52ED13B92B582BF8008E4A78 /* map.swift */,
 				52CDA8BB2B5C608B00CD386D /* Mapbox.swift */,
+				52D884022BA9DE8200BEC3EE /* maps3d.swift */,
 			);
 			path = ddui;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				52FF0A862B64573100D2B3E4 /* WidgetLarge.swift in Sources */,
 				527D3F792B330405004AD228 /* dduiApp.swift in Sources */,
 				52ED13BA2B582BF8008E4A78 /* map.swift in Sources */,
+				52D884032BA9DE8200BEC3EE /* maps3d.swift in Sources */,
 				52CDA8BC2B5C608B00CD386D /* Mapbox.swift in Sources */,
 				526D44B52B35B67F00ACDD49 /* grid.swift in Sources */,
 			);
